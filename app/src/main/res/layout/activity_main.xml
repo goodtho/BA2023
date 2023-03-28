@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/box_inset_layout_padding"
+    android:background="#363936"
     tools:context=".MainActivity"
     tools:deviceIds="wear">
 
@@ -14,11 +15,48 @@
         android:padding="@dimen/inner_frame_layout_padding"
         app:layout_boxedEdges="all">
 
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/startButton"
+                android:layout_width="49dp"
+                android:layout_height="45dp"
+                android:contentDescription="@string/playicon"
+                android:src="@android:drawable/ic_media_play"
+                app:layout_constraintBottom_toTopOf="@+id/text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.907" />
+
+            <ImageView
+                android:id="@+id/settingsIcon"
+                android:layout_width="28dp"
+                android:layout_height="43dp"
+                android:contentDescription="SettingsIcon"
+                android:src="@drawable/settings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.959"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_activity"
+                android:textSize="16sp"
+                android:textColor="#FAFAFA"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.457"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.803" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
 </androidx.wear.widget.BoxInsetLayout>

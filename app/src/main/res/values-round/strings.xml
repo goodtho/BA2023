@@ -1,3 +1,14 @@
 <resources>
     <string name="hello_world">Hello Round World!</string>
+    <string name="start_activity">Beginne die Übung</string>
+    <string name="keep_going">Weiter so!</string>
+    <string name="thinking">Nachdenken</string>
+    <string name="alert_screen">Bist du abgelenkt?</string>
+    <string name="settings_1">Lernen beenden</string>
+    <string name="settings_2">Lernzeit</string>
+    <string name="settings_3">Statistik</string>
+    <string name="settings_4">Timer reset</string>
+    <string name="settings_5">Sterne</string>
+    <string name="pause">Pause</string>
+    <string name="finished_training">Übung beendet!</string>
 </resources>
