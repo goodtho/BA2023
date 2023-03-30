@@ -1,6 +1,7 @@
 package com.example.ba2023
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import com.example.ba2023.databinding.ActivityMainBinding
 
@@ -13,6 +14,19 @@ class MainActivity : Activity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val startButton = binding.startButton
+        val settingsButton = binding.settingsIcon
+
+        startButton.setOnClickListener{
+            val intent = Intent(this, WritingActivity::class.java)
+            startActivity(intent)
+        }
+
+        settingsButton.setOnClickListener{
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }
