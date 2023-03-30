@@ -1,10 +1,10 @@
 package com.example.ba2023
 
-import android.app.Activity
 import android.os.Bundle
+import android.widget.ImageView
 import com.example.ba2023.databinding.ActivityMainBinding
 
-class WritingActivity : Activity() {
+class WritingActivity : ScreenActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -13,6 +13,8 @@ class WritingActivity : Activity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.writing)
+        val settingIcon: ImageView = findViewById(R.id.settingsIcon)
 
+        setUpSettingsClickListener(settingIcon)
     }
 }
