@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.ba2023.databinding.ActivityMainBinding
 
-class MainActivity : Activity() {
+class MainActivity : ScreenActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -23,10 +23,7 @@ class MainActivity : Activity() {
             startActivity(intent)
         }
 
-        settingsButton.setOnClickListener{
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
-        }
+        setUpSettingsClickListener(settingsButton)
 
     }
 }

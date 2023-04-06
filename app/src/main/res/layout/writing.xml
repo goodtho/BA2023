@@ -51,7 +51,7 @@
                 android:contentDescription="@string/settingsicon"
                 android:src="@drawable/settings"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.959"
+                app:layout_constraintHorizontal_bias="0.991"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
