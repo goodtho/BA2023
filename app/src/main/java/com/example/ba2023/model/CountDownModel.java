@@ -1,7 +1,13 @@
 package com.example.ba2023.model;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.widget.TextView;
+
+import com.example.ba2023.FinishedActivity;
+import com.example.ba2023.MainActivity;
+import com.example.ba2023.ScreenActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,15 +16,17 @@ public class CountDownModel  extends CountDownTimer {
     private static String hms;
     private static CountDownModel instance;
     private static TextView currentTextView;
+    private static Context context;
 
     private CountDownModel(long millisInFuture, long countDownInterval) {
         super(millisInFuture, countDownInterval);
         hms = formatTime(millisInFuture);
     }
 
-    public static CountDownModel initInstance(long millisInFuture, long countDownInterval) {
+    public static CountDownModel initInstance(long millisInFuture, long countDownInterval, Context activity) {
         if (instance == null) {
             instance = new CountDownModel(millisInFuture, countDownInterval);
+            context = activity;
         }
         return instance;
     }
@@ -64,6 +72,7 @@ public class CountDownModel  extends CountDownTimer {
 
     @Override
     public void onFinish() {
-
+        Intent intent = new Intent(context, FinishedActivity.class);
+        context.startActivity(intent);
     }
 }

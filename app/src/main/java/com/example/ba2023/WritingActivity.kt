@@ -21,7 +21,7 @@ class WritingActivity : ScreenActivity() {
         val timer: TextView = findViewById(R.id.timer)
 
         setUpSettingsClickListener(settingIcon)
-        countDownModel = CountDownModel.initInstance(180000, 1000)
+        countDownModel = CountDownModel.initInstance(30000, 1000, this)
         CountDownModel.setCurrentTextView(timer)
         countDownModel.start()
         timer.text = CountDownModel.getTimeMS()
