@@ -12,7 +12,7 @@ class SettingsActivity : Activity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(R.layout.settings)
+        setContentView(R.layout.activity_settings)
 
     }
 }
