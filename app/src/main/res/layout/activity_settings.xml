@@ -40,7 +40,7 @@
             app:layout_constraintVertical_bias="0.674">
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/finishLearningLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:orientation="horizontal">
@@ -119,6 +119,7 @@
                 android:background="@android:color/white" />
 
             <LinearLayout
+                android:id="@+id/resetTimerLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:orientation="horizontal">

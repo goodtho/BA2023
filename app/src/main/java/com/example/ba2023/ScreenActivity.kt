@@ -5,9 +5,10 @@ import android.content.Intent
 import android.widget.ImageView
 
 open class ScreenActivity : Activity() {
-    fun setUpSettingsClickListener(button: ImageView) {
+    fun setUpSettingsClickListener(button: ImageView, caller: String) {
         button.setOnClickListener{
             val intent = Intent(this, SettingsActivity::class.java)
+            intent.putExtra("caller", caller)
             startActivity(intent)
         }
     }

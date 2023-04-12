@@ -21,7 +21,7 @@ class ThinkingActivity : ScreenActivity() {
         val settingIcon: ImageView = findViewById(R.id.settingsIcon)
         val timer: TextView = findViewById(R.id.timer)
 
-        setUpSettingsClickListener(settingIcon)
+        setUpSettingsClickListener(settingIcon,this.javaClass.name)
         countDownModel = CountDownModel.getInstance()
         CountDownModel.setCurrentTextView(timer)
         timer.text = CountDownModel.getTimeMS()

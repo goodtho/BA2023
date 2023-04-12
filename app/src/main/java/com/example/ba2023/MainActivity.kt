@@ -1,6 +1,5 @@
 package com.example.ba2023
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.example.ba2023.databinding.ActivityMainBinding
@@ -15,6 +14,7 @@ class MainActivity : ScreenActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val startButton = binding.startButton
         val settingsButton = binding.settingsIcon
 
@@ -23,7 +23,7 @@ class MainActivity : ScreenActivity() {
             startActivity(intent)
         }
 
-        setUpSettingsClickListener(settingsButton)
+        setUpSettingsClickListener(settingsButton,this.javaClass.name)
 
     }
 }

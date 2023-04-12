@@ -20,7 +20,7 @@ class WritingActivity : ScreenActivity() {
         val settingIcon: ImageView = findViewById(R.id.settingsIcon)
         val timer: TextView = findViewById(R.id.timer)
 
-        setUpSettingsClickListener(settingIcon)
+        setUpSettingsClickListener(settingIcon,this.javaClass.name)
         countDownModel = CountDownModel.initInstance(30000, 1000, this)
         CountDownModel.setCurrentTextView(timer)
         countDownModel.start()
