@@ -38,7 +38,9 @@ public class CountDownModel  extends CountDownTimer {
             return instance;
         }
     }
-
+    public static boolean isInstanceNull() {
+        return instance == null;
+    }
     public static String getFormatedTime() {
         return hms;
     }

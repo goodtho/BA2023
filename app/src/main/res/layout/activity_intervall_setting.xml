@@ -34,43 +34,53 @@
             app:layout_constraintVertical_bias="0.355">
 
             <LinearLayout
+                android:id="@+id/writing_linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="22dp"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/handwithpen" />
+                    android:id="@+id/hand_logo"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/handwithpen" />
 
-                <NumberPicker
+                <TextView
+                    android:id="@+id/writing_numberPickerH"
                     android:layout_width="40dp"
-                    android:layout_height="22dp"></NumberPicker>
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="#FFF"
+                    android:layout_height="22dp"/>
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="22dp"
                     android:background="#FFF" />
 
-                <NumberPicker
-                    android:id="@+id/numberPicker"
+                <TextView
+                    android:id="@+id/writing_numberPickerM"
                     android:layout_width="50dp"
                     android:layout_height="22dp"
-                    android:layout_weight="1"></NumberPicker>
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="#FFF"
+                    android:layout_weight="1"/>
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="22dp"
                     android:background="#FFF" />
 
-                <NumberPicker
-                    android:id="@+id/numberPicker2"
+                <TextView
+                    android:id="@+id/writing_numberPickerS"
                     android:layout_width="50dp"
                     android:layout_height="22dp"
-                    android:layout_weight="1"></NumberPicker>
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="#FFF"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <LinearLayout
@@ -80,15 +90,15 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/runningrabbit" />
+                    android:id="@+id/rabbit_logo"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/runningrabbit" />
 
                 <NumberPicker
+                    android:id="@+id/pause_numberPickerH"
                     android:layout_width="40dp"
-                    android:layout_height="22dp"></NumberPicker>
+                    android:layout_height="22dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -96,10 +106,10 @@
                     android:background="#FFF" />
 
                 <NumberPicker
-                    android:id="@+id/numberPicker3"
+                    android:id="@+id/pause_numberPickerM"
                     android:layout_width="50dp"
                     android:layout_height="22dp"
-                    android:layout_weight="1"></NumberPicker>
+                    android:layout_weight="1"/>
 
                 <View
                     android:layout_width="1dp"
@@ -107,10 +117,10 @@
                     android:background="#FFF" />
 
                 <NumberPicker
-                    android:id="@+id/numberPicker4"
+                    android:id="@+id/pause_numberPickerS"
                     android:layout_width="50dp"
                     android:layout_height="22dp"
-                    android:layout_weight="1"></NumberPicker>
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <LinearLayout
@@ -120,37 +130,18 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView12"
-                    android:layout_width="59dp"
-                    android:layout_height="21dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/process" />
+                    android:id="@+id/cycle_logo"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/process" />
 
                 <NumberPicker
-                    android:layout_width="40dp"
-                    android:layout_height="22dp"></NumberPicker>
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="22dp"
-                    android:background="#FFF" />
-
-                <NumberPicker
-                    android:id="@+id/numberPicker5"
+                    android:id="@+id/interval_Cycle"
                     android:layout_width="50dp"
                     android:layout_height="22dp"
-                    android:layout_weight="1"></NumberPicker>
+                    android:textSize="12sp"
+                    android:layout_weight="1"/>
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="22dp"
-                    android:background="#FFF" />
-
-                <NumberPicker
-                    android:id="@+id/numberPicker6"
-                    android:layout_width="50dp"
-                    android:layout_height="22dp"
-                    android:layout_weight="1"></NumberPicker>
             </LinearLayout>
 
         </LinearLayout>

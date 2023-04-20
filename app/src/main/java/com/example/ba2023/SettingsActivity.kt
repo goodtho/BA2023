@@ -11,17 +11,21 @@ import com.example.ba2023.model.CountDownModel
 class SettingsActivity : Activity() {
 
     private lateinit var binding: ActivitySettingsBinding
-
+    private lateinit var countDownModel:CountDownModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_settings)
 
-        val countDownModel:CountDownModel = CountDownModel.getInstance()
+        val isInstanceNull:Boolean= CountDownModel.isInstanceNull()
+        if(!isInstanceNull) {
+             countDownModel = CountDownModel.getInstance()
+        }
         val backButton:ImageView = findViewById(R.id.backButton)
         val finishLearningButton:LinearLayout = findViewById(R.id.finishLearningLinearLayout)
         val resetTimerButton:LinearLayout = findViewById(R.id.resetTimerLinearLayout)
+        val timerConfigButton:LinearLayout = findViewById(R.id.timerConfigLinearLayout)
 
         //get back to the previous activity
         backButton.setOnClickListener {
@@ -32,12 +36,20 @@ class SettingsActivity : Activity() {
         }
 
         finishLearningButton.setOnClickListener{
-            countDownModel.onFinish()
+            if (!isInstanceNull)
+                countDownModel.onFinish()
         }
 
         resetTimerButton.setOnClickListener{
-            countDownModel.cancel()
-            countDownModel.start()
+            if(!isInstanceNull)
+                countDownModel.cancel()
+                countDownModel.start()
         }
+
+        timerConfigButton.setOnClickListener {
+            val intent = Intent(this, IntervalSettingActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

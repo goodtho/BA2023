@@ -67,6 +67,7 @@
                 android:background="@android:color/white" />
 
             <LinearLayout
+                android:id="@+id/timerConfigLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:orientation="horizontal">
