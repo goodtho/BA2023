@@ -41,9 +41,10 @@ class SettingsActivity : Activity() {
         }
 
         resetTimerButton.setOnClickListener{
-            if(!isInstanceNull)
+            if(!isInstanceNull) {
                 countDownModel.cancel()
                 countDownModel.start()
+            }
         }
 
         timerConfigButton.setOnClickListener {
