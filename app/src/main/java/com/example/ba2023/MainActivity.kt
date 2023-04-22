@@ -3,6 +3,7 @@ package com.example.ba2023
 import android.content.Intent
 import android.os.Bundle
 import com.example.ba2023.databinding.ActivityMainBinding
+import com.example.ba2023.model.CountDownModel
 import com.example.ba2023.model.CycleUtil
 
 class MainActivity : ScreenActivity() {
@@ -27,5 +28,6 @@ class MainActivity : ScreenActivity() {
 
         //load Cycle for the exercises
         CycleUtil.loadCycleFromConfig(this)
+        CountDownModel.setCaller(this.javaClass.name)
     }
 }

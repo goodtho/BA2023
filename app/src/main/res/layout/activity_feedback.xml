@@ -12,16 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/backButton"
-            android:layout_width="32dp"
-            android:layout_height="34dp"
-            android:contentDescription="backIcon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icons8backarrow100" />
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -31,7 +21,7 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.248"
+            app:layout_constraintHorizontal_bias="0.16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
@@ -54,10 +44,10 @@
             android:layout_width="21dp"
             android:layout_height="31dp"
             app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:layout_constraintEnd_toStartOf="@+id/imageView9"
+            app:layout_constraintEnd_toStartOf="@+id/imageView5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/filledstar" />
+            android:src="@drawable/filledstar" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -67,19 +57,21 @@
             app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.524"
-            app:layout_constraintStart_toEndOf="@+id/imageView9"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/filledstar" />
+            android:src="@drawable/filledstar" />
 
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="21dp"
             android:layout_height="31dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:srcCompat="@drawable/filledstar" />
+            app:layout_constraintVertical_bias="0.482"
+            android:src="@drawable/filledstar" />
 
         <ImageView
             android:id="@+id/imageView7"
@@ -87,32 +79,34 @@
             android:layout_height="31dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.182"
-            app:layout_constraintStart_toEndOf="@+id/imageView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:layout_constraintVertical_bias="0.714"
-            app:srcCompat="@drawable/filledstar" />
-
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="21dp"
-            android:layout_height="31dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.708"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:layout_constraintVertical_bias="0.196"
-            app:srcCompat="@drawable/filledstar" />
+            app:layout_constraintVertical_bias="0.714"
+            android:src="@drawable/filledstar" />
+
 
         <ImageView
-            android:id="@+id/imageView9"
+            android:id="@+id/imageView10"
             android:layout_width="21dp"
             android:layout_height="31dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/filledstar" />
+            android:src="@drawable/filledstar" />
+
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="21dp"
+            android:layout_height="31dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/filledstar" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

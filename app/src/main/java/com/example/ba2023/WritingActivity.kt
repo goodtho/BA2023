@@ -23,7 +23,9 @@ class WritingActivity : ScreenActivity() {
 
         setUpSettingsClickListener(settingIcon,this.javaClass.name)
 
-        if (CountDownModel.isInstanceNull() || CountDownModel.getCaller() == PauseActivity::class.java.name) {
+        if (CountDownModel.isInstanceNull()
+            || CountDownModel.getCaller() == PauseActivity::class.java.name
+            || CountDownModel.getCaller() == MainActivity::class.java.name) {
             var configModel = ConfigModel(this)
             var writingTime = configModel.getProperty(ConfigModel.TIMER_WRITING).toLong()
             countDownModel = CountDownModel.initInstance(writingTime, 1000, this)
