@@ -34,7 +34,6 @@ class IntervalSettingActivity : ScreenActivity() {
         val writingLinearLayout: LinearLayout = findViewById(R.id.writing_linear_layout)
         val pauseLinearLayout: LinearLayout = findViewById(R.id.pause_linear_layout)
         val cycleLinearLayout: LinearLayout = findViewById(R.id.cycle_linear_layout)
-        val backButton: ImageView = findViewById(R.id.backButton)
 
         //set Time defined in config.conf
         configModel = ConfigModel(this)
@@ -54,11 +53,6 @@ class IntervalSettingActivity : ScreenActivity() {
             callNumberPickerPopupCycle(cycle,cycleLinearLayout)
         }
 
-        backButton.setOnClickListener {
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
     }
 
     private fun getTimeFromConfigAndSetView(hoursTextView: TextView,minutesTextView: TextView,secondsTextView: TextView,property:String){

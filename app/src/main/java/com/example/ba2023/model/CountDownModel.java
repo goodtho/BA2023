@@ -6,9 +6,10 @@ import android.os.CountDownTimer;
 import android.widget.TextView;
 
 import com.example.ba2023.FinishedActivity;
-import com.example.ba2023.MainActivity;
-import com.example.ba2023.ScreenActivity;
+import com.example.ba2023.PauseActivity;
+import com.example.ba2023.WritingActivity;
 
+import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
 public class CountDownModel  extends CountDownTimer {
@@ -16,18 +17,17 @@ public class CountDownModel  extends CountDownTimer {
     private static String hms;
     private static CountDownModel instance;
     private static TextView currentTextView;
-    private static Context context;
+    private static String caller;
+    private WeakReference<Context> contextRef;
 
-    private CountDownModel(long millisInFuture, long countDownInterval) {
+    private CountDownModel(long millisInFuture, long countDownInterval, Context context) {
         super(millisInFuture, countDownInterval);
         hms = formatTime(millisInFuture);
+        contextRef = new WeakReference<>(context);
     }
 
     public static CountDownModel initInstance(long millisInFuture, long countDownInterval, Context activity) {
-        if (instance == null) {
-            instance = new CountDownModel(millisInFuture, countDownInterval);
-            context = activity;
-        }
+        instance = new CountDownModel(millisInFuture, countDownInterval, activity);
         return instance;
     }
 
@@ -38,6 +38,7 @@ public class CountDownModel  extends CountDownTimer {
             return instance;
         }
     }
+
     public static boolean isInstanceNull() {
         return instance == null;
     }
@@ -50,6 +51,14 @@ public class CountDownModel  extends CountDownTimer {
 
     public static TextView getCurrentTextView() {
         return currentTextView;
+    }
+
+    public static void setCaller(String caller) {
+        CountDownModel.caller = caller;
+    }
+
+    public static String getCaller() {
+        return caller;
     }
 
     public static void setCurrentTextView(TextView currentTextView) {
@@ -74,7 +83,22 @@ public class CountDownModel  extends CountDownTimer {
 
     @Override
     public void onFinish() {
-        Intent intent = new Intent(context, FinishedActivity.class);
-        context.startActivity(intent);
+        int cycle = CycleUtil.getCycle();
+
+        Class switchActivity = PauseActivity.class;
+        //stop the exercise
+        if (cycle == 0) {
+            switchActivity = FinishedActivity.class;
+        }
+        Context context = contextRef.get();
+        if (caller.equals(PauseActivity.class.getName())) {
+            switchActivity = WritingActivity.class;
+            CycleUtil.setCycle(--cycle);
+        }
+
+        if (context != null) {
+            Intent intent = new Intent(context, switchActivity);
+            context.startActivity(intent);
+        }
     }
 }

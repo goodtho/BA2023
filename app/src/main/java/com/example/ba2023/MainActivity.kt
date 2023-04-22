@@ -3,6 +3,7 @@ package com.example.ba2023
 import android.content.Intent
 import android.os.Bundle
 import com.example.ba2023.databinding.ActivityMainBinding
+import com.example.ba2023.model.CycleUtil
 
 class MainActivity : ScreenActivity() {
 
@@ -14,7 +15,6 @@ class MainActivity : ScreenActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val startButton = binding.startButton
         val settingsButton = binding.settingsIcon
 
@@ -25,5 +25,7 @@ class MainActivity : ScreenActivity() {
 
         setUpSettingsClickListener(settingsButton,this.javaClass.name)
 
+        //load Cycle for the exercises
+        CycleUtil.loadCycleFromConfig(this)
     }
 }

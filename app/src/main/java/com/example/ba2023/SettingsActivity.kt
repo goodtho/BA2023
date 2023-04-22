@@ -22,18 +22,9 @@ class SettingsActivity : Activity() {
         if(!isInstanceNull) {
              countDownModel = CountDownModel.getInstance()
         }
-        val backButton:ImageView = findViewById(R.id.backButton)
         val finishLearningButton:LinearLayout = findViewById(R.id.finishLearningLinearLayout)
         val resetTimerButton:LinearLayout = findViewById(R.id.resetTimerLinearLayout)
         val timerConfigButton:LinearLayout = findViewById(R.id.timerConfigLinearLayout)
-
-        //get back to the previous activity
-        backButton.setOnClickListener {
-            val caller = intent.getStringExtra("caller")
-            val callerClass = Class.forName(caller) as Class<*>
-            val intent = Intent(this, callerClass)
-            startActivity(intent)
-        }
 
         finishLearningButton.setOnClickListener{
             if (!isInstanceNull)

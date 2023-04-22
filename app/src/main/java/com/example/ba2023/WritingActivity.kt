@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.ba2023.databinding.ActivityMainBinding
+import com.example.ba2023.model.ConfigModel
 import com.example.ba2023.model.CountDownModel
 
 class WritingActivity : ScreenActivity() {
@@ -21,9 +22,19 @@ class WritingActivity : ScreenActivity() {
         val timer: TextView = findViewById(R.id.timer)
 
         setUpSettingsClickListener(settingIcon,this.javaClass.name)
-        countDownModel = CountDownModel.initInstance(30000, 1000, this)
+
+        if (CountDownModel.isInstanceNull() || CountDownModel.getCaller() == PauseActivity::class.java.name) {
+            var configModel = ConfigModel(this)
+            var writingTime = configModel.getProperty(ConfigModel.TIMER_WRITING).toLong()
+            countDownModel = CountDownModel.initInstance(writingTime, 1000, this)
+            countDownModel.start()
+
+        }  else {
+            countDownModel = CountDownModel.getInstance()
+        }
+
+        CountDownModel.setCaller(this.javaClass.name)
         CountDownModel.setCurrentTextView(timer)
-        countDownModel.start()
         timer.text = CountDownModel.getTimeMS()
 
         val thumbsUpIcon: ImageView = findViewById(R.id.startButton)
