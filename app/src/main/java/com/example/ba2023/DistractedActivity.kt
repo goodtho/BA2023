@@ -59,8 +59,10 @@ class DistractedActivity : ScreenActivity(), SensorEventListener {
     override fun onSensorChanged(event: SensorEvent?) {
         if (event != null) {
             if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
-                WritingStatusManager.checkWritingStatus(this)
-            }
+                val x = event.values[0].toDouble()
+                val y = event.values[1].toDouble()
+                val z = event.values[2].toDouble()
+                WritingStatusManager.checkWritingStatus(x,y,z)            }
         }
     }
 

@@ -6,7 +6,7 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 
-class WritingController(private val writingStatusManager: Context) : SensorEventListener {
+class WritingController(private val writingStatusManager: Context) {
     private val buffer = CircularBuffer(10)
 
     object WritingValues {
@@ -57,17 +57,9 @@ class WritingController(private val writingStatusManager: Context) : SensorEvent
         return validCount >= threshold
     }
 
-    override fun onSensorChanged(event: SensorEvent?) {
-        if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
-            val x = event.values[0].toDouble()
-            val y = event.values[1].toDouble()
-            val z = event.values[2].toDouble()
-            buffer.addData(x, y, z)
-            WritingStatusManager.checkWritingStatus(writingStatusManager)
-        }
+    fun addDataToBuffer(x:Double, y:Double, z:Double){
+        buffer.addData(x, y, z)
     }
-
-    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {}
 
     class CircularBuffer(val capacity: Int) {
         private val xValues = DoubleArray(capacity)

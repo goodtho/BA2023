@@ -30,5 +30,6 @@ class MainActivity : ScreenActivity() {
         //load Cycle for the exercises
         CycleUtil.loadCycleFromConfig(this)
         CountDownModel.setCaller(this.javaClass.name)
+        WritingStatusManager.initStatusManager(this)
     }
 }

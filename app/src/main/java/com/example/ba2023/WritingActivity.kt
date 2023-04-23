@@ -1,5 +1,6 @@
 package com.example.ba2023
 
+import WritingStatusManager
 import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
@@ -71,10 +72,12 @@ class WritingActivity : ScreenActivity(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
-        Log.d(this.javaClass.name, "entered onsensorevent");
         if (event != null) {
             if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
-                WritingStatusManager.checkWritingStatus(this)
+                val x = event.values[0].toDouble()
+                val y = event.values[1].toDouble()
+                val z = event.values[2].toDouble()
+                WritingStatusManager.checkWritingStatus(x,y,z)
             }
         }
     }

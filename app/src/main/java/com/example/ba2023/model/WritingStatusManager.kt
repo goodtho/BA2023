@@ -10,11 +10,15 @@ object WritingStatusManager {
     private val writingDurationThreshold = 5 * 1000L
     private val notWritingDurationThreshold = 60 * 1000L
     private var initialState = true
+    private lateinit var writingController: WritingController
+    private lateinit var screenHandler: ScreenHandler
 
-    fun checkWritingStatus(context: Context) {
+    fun initStatusManager(context: Context) {
+        writingController = WritingController(context)
+        screenHandler = ScreenHandler(context)
+    }
+    fun checkWritingStatus(x:Double,y:Double,z:Double) {
         val currentTime = System.currentTimeMillis()
-        val writingController = WritingController(context)
-        val screenHandler = ScreenHandler(context)
 
         if (initialState) {
             if (currentTime - lastWritingTimestamp >= writingDurationThreshold) {
@@ -23,30 +27,31 @@ object WritingStatusManager {
             return
         }
 
-        Log.d("TEST", "Not in initial state")
-
+        writingController.addDataToBuffer(x,y,z)
         val currentWritingStatus = writingController.isAndroidWatchWritingAverage()
-        Log.d(this.javaClass.name, "Current writing status: $currentWritingStatus + $currentWritingStatus")
+
         if (currentWritingStatus) {
             if (!isLastStateWriting) {
-//                if (currentTime - lastNotWritingTimestamp >= writingDurationThreshold) {
-                isLastStateWriting = true
-                screenHandler.showWritingActivity()
-//                }
+                if (currentTime - lastNotWritingTimestamp >= writingDurationThreshold) {
+                    isLastStateWriting = true
+                    screenHandler.showWritingActivity()
+                }
             }
             lastWritingTimestamp = currentTime
         } else {
             if (isLastStateWriting) {
-//                if (currentTime - lastWritingTimestamp >= writingDurationThreshold) {
-                isLastStateWriting = false
-                screenHandler.showThinkingActivity()
-//                }
+                if (currentTime - lastWritingTimestamp >= writingDurationThreshold) {
+                    isLastStateWriting = false
+                    screenHandler.showThinkingActivity()
+                }
+                lastNotWritingTimestamp = currentTime
             } else {
-//                if (currentTime - lastNotWritingTimestamp >= notWritingDurationThreshold) {
-                screenHandler.showDistractedActivity()
-//                }
+                Log.d(this.javaClass.name, "writingTime  $currentTime - $lastNotWritingTimestamp >= $notWritingDurationThreshold")
+
+                if (currentTime - lastNotWritingTimestamp >= notWritingDurationThreshold) {
+                    screenHandler.showDistractedActivity()
+                }
             }
-            lastNotWritingTimestamp = currentTime
         }
     }
 }
