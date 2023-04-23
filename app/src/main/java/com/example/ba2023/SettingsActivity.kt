@@ -28,7 +28,9 @@ class SettingsActivity : Activity() {
 
         finishLearningButton.setOnClickListener{
             if (!isInstanceNull)
-                countDownModel.onFinish()
+                countDownModel.cancel()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
         }
 
         resetTimerButton.setOnClickListener{
