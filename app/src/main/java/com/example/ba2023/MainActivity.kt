@@ -1,5 +1,6 @@
 package com.example.ba2023
 
+import WritingStatusManager
 import android.content.Intent
 import android.os.Bundle
 import com.example.ba2023.databinding.ActivityMainBinding
@@ -19,8 +20,8 @@ class MainActivity : ScreenActivity() {
         val settingsButton = binding.settingsIcon
 
         startButton.setOnClickListener{
-            val intent = Intent(this, WritingActivity::class.java)
-            startActivity(intent)
+            val test:WritingStatusManager = WritingStatusManager(this)
+            test.run {  }
         }
 
         setUpSettingsClickListener(settingsButton,this.javaClass.name)
