@@ -12,6 +12,7 @@ object WritingStatusManager {
     private var initialState = true
     private lateinit var writingController: WritingController
     private lateinit var screenHandler: ScreenHandler
+    private var distractedActivityShown = false
 
     fun initStatusManager(context: Context) {
         writingController = WritingController(context)
@@ -34,6 +35,7 @@ object WritingStatusManager {
             if (!isLastStateWriting) {
                 if (currentTime - lastNotWritingTimestamp >= writingDurationThreshold) {
                     isLastStateWriting = true
+                    distractedActivityShown = false
                     screenHandler.showWritingActivity()
                 }
             }
@@ -46,9 +48,8 @@ object WritingStatusManager {
                 }
                 lastNotWritingTimestamp = currentTime
             } else {
-                Log.d(this.javaClass.name, "writingTime  $currentTime - $lastNotWritingTimestamp >= $notWritingDurationThreshold")
-
-                if (currentTime - lastNotWritingTimestamp >= notWritingDurationThreshold) {
+                if (!distractedActivityShown && currentTime - lastNotWritingTimestamp >= notWritingDurationThreshold) {
+                    distractedActivityShown = true
                     screenHandler.showDistractedActivity()
                 }
             }
