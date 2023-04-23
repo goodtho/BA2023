@@ -1,12 +1,12 @@
 package com.example.ba2023.model
 
 import WritingStatusManager
-import android.app.Activity
+import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 
-class WritingController(private val writingStatusManager: WritingStatusManager) : SensorEventListener {
+class WritingController(private val writingStatusManager: Context) : SensorEventListener {
     private val buffer = CircularBuffer(10)
 
     object WritingValues {
@@ -63,7 +63,7 @@ class WritingController(private val writingStatusManager: WritingStatusManager) 
             val y = event.values[1].toDouble()
             val z = event.values[2].toDouble()
             buffer.addData(x, y, z)
-            writingStatusManager.checkWritingStatus()
+            WritingStatusManager.checkWritingStatus(writingStatusManager)
         }
     }
 

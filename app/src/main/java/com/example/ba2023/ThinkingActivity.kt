@@ -1,20 +1,32 @@
 package com.example.ba2023
 
+import android.content.Context
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.ba2023.databinding.ActivityMainBinding
 import com.example.ba2023.databinding.ActivityThinkingBinding
 import com.example.ba2023.model.CountDownModel
 
-class ThinkingActivity : ScreenActivity() {
+class ThinkingActivity : ScreenActivity(), SensorEventListener {
 
     private lateinit var binding: ActivityThinkingBinding
-    private lateinit var countDownModel:CountDownModel;
+    private lateinit var countDownModel:CountDownModel
+    private lateinit var sensorManager: SensorManager
+    private lateinit var accelerometer: Sensor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
         binding = ActivityThinkingBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -31,5 +43,25 @@ class ThinkingActivity : ScreenActivity() {
             val intent = Intent(this, DistractedActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(this)
+    }
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event != null) {
+            if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
+                WritingStatusManager.checkWritingStatus(this)
+            }
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
     }
 }

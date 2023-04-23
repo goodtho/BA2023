@@ -21,8 +21,8 @@ class MainActivity : ScreenActivity() {
         val settingsButton = binding.settingsIcon
 
         startButton.setOnClickListener{
-            val test:WritingStatusManager = WritingStatusManager(this)
-            test.run {  }
+            val intent = Intent(this, WritingActivity::class.java)
+            startActivity(intent)
         }
 
         setUpSettingsClickListener(settingsButton,this.javaClass.name)
