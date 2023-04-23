@@ -7,7 +7,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 
 class WritingController(private val writingStatusManager: WritingStatusManager) : SensorEventListener {
-    private val buffer = CircularBuffer(20)
+    private val buffer = CircularBuffer(10)
 
     object WritingValues {
         // add 40% threshold
