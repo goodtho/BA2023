@@ -1,18 +1,21 @@
 import android.content.Context
-import android.util.Log
 import com.example.ba2023.model.ScreenHandler
 import com.example.ba2023.model.WritingController
 
 object WritingStatusManager {
-    private var isLastStateWriting = true
-    private var lastWritingTimestamp = System.currentTimeMillis()
-    private var lastNotWritingTimestamp = System.currentTimeMillis()
+    private var lastScreenChangeTimeStmp = System.currentTimeMillis()
     private val writingDurationThreshold = 5 * 1000L
-    private val notWritingDurationThreshold = 60 * 1000L
+    private val thinkingDuration = 60 * 1000L
     private var initialState = true
     private lateinit var writingController: WritingController
     private lateinit var screenHandler: ScreenHandler
-    private var distractedActivityShown = false
+
+    enum class ScreenState {
+        WRITING,
+        THINKING,
+        DISTURBED
+    }
+    private var screenState = ScreenState.WRITING
 
     fun initStatusManager(context: Context) {
         writingController = WritingController(context)
@@ -22,34 +25,31 @@ object WritingStatusManager {
         val currentTime = System.currentTimeMillis()
 
         if (initialState) {
-            if (currentTime - lastWritingTimestamp >= writingDurationThreshold) {
+            if (currentTime - lastScreenChangeTimeStmp >= writingDurationThreshold) {
                 initialState = false
             }
             return
         }
 
         writingController.addDataToBuffer(x,y,z)
-        val currentWritingStatus = writingController.isAndroidWatchWritingAverage()
+        val isCurrentlyWriting = writingController.isAndroidWatchWritingAverage()
 
-        if (currentWritingStatus) {
-            if (!isLastStateWriting) {
-                if (currentTime - lastNotWritingTimestamp >= writingDurationThreshold) {
-                    isLastStateWriting = true
-                    distractedActivityShown = false
-                    screenHandler.showWritingActivity()
-                }
+        if (isCurrentlyWriting) {
+            if (screenState != ScreenState.WRITING) {
+                screenState = ScreenState.WRITING
+                screenHandler.showWritingActivity()
             }
-            lastWritingTimestamp = currentTime
+            lastScreenChangeTimeStmp = currentTime
         } else {
-            if (isLastStateWriting) {
-                if (currentTime - lastWritingTimestamp >= writingDurationThreshold) {
-                    isLastStateWriting = false
+            if (screenState == ScreenState.WRITING) {
+                if (currentTime - lastScreenChangeTimeStmp >= writingDurationThreshold) {
+                    screenState = ScreenState.THINKING
+                    lastScreenChangeTimeStmp = currentTime
                     screenHandler.showThinkingActivity()
                 }
-                lastNotWritingTimestamp = currentTime
             } else {
-                if (!distractedActivityShown && currentTime - lastNotWritingTimestamp >= notWritingDurationThreshold) {
-                    distractedActivityShown = true
+                if (screenState == ScreenState.THINKING && currentTime - lastScreenChangeTimeStmp >= thinkingDuration) {
+                    screenState = ScreenState.DISTURBED
                     screenHandler.showDistractedActivity()
                 }
             }
