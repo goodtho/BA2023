@@ -4,8 +4,8 @@ import com.example.ba2023.model.WritingController
 
 object WritingStatusManager {
     private var lastScreenChangeTimeStmp = System.currentTimeMillis()
-    private val writingDurationThreshold = 5 * 1000L
-    private val thinkingDuration = 60 * 1000L
+    private val secondsToWaitTillLeavingWritingState = 5 * 1000L
+    private val secondsToStayInThinkingState = 60 * 1000L
     private var initialState = true
     private lateinit var writingController: WritingController
     private lateinit var screenHandler: ScreenHandler
@@ -23,15 +23,15 @@ object WritingStatusManager {
     }
     fun checkWritingStatus(x:Double,y:Double,z:Double) {
         val currentTime = System.currentTimeMillis()
+        writingController.addDataToBuffer(x,y,z)
 
         if (initialState) {
-            if (currentTime - lastScreenChangeTimeStmp >= writingDurationThreshold) {
+            if (currentTime - lastScreenChangeTimeStmp >= secondsToWaitTillLeavingWritingState) {
                 initialState = false
             }
             return
         }
 
-        writingController.addDataToBuffer(x,y,z)
         val isCurrentlyWriting = writingController.isAndroidWatchWritingAverage()
 
         if (isCurrentlyWriting) {
@@ -42,13 +42,13 @@ object WritingStatusManager {
             lastScreenChangeTimeStmp = currentTime
         } else {
             if (screenState == ScreenState.WRITING) {
-                if (currentTime - lastScreenChangeTimeStmp >= writingDurationThreshold) {
+                if (currentTime - lastScreenChangeTimeStmp >= secondsToWaitTillLeavingWritingState) {
                     screenState = ScreenState.THINKING
                     lastScreenChangeTimeStmp = currentTime
                     screenHandler.showThinkingActivity()
                 }
             } else {
-                if (screenState == ScreenState.THINKING && currentTime - lastScreenChangeTimeStmp >= thinkingDuration) {
+                if (screenState == ScreenState.THINKING && currentTime - lastScreenChangeTimeStmp >= secondsToStayInThinkingState) {
                     screenState = ScreenState.DISTURBED
                     screenHandler.showDistractedActivity()
                 }
