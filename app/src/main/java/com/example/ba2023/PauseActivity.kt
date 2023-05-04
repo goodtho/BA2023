@@ -28,14 +28,16 @@ class PauseActivity : ScreenActivity() {
         setUpSettingsClickListener(settingIcon,this.javaClass.name)
 
 
-        var configModel = ConfigModel(this)
-        var pauseTime = configModel.getProperty(ConfigModel.TIMER_PAUSE).toLong()
-        countDownModel = CountDownModel.initInstance(pauseTime, 1000, this)
-        CountDownModel.setCaller(this.javaClass.name)
+        val configModel = ConfigModel(this)
+        val pauseTime = configModel.getProperty(ConfigModel.TIMER_PAUSE).toLong()
+        countDownModel = CountDownModel.initInstance(pauseTime, 1000, this)!!
+        CountDownModel.caller = this.javaClass.name
 
-        CountDownModel.setCurrentTextView(timer)
+        CountDownModel.currentTextView = timer
         countDownModel.start()
-        timer.text = CountDownModel.getTimeMS()
+        timer.text = CountDownModel.timeMS
+
+        vibrate(500)
 
     }
 }

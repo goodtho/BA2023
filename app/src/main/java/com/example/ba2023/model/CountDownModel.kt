@@ -1,104 +1,98 @@
-package com.example.ba2023.model;
+package com.example.ba2023.model
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.CountDownTimer;
-import android.widget.TextView;
+import WritingStatusManager
+import android.content.Context
+import android.content.Intent
+import android.os.CountDownTimer
+import android.widget.TextView
+import com.example.ba2023.FinishedActivity
+import com.example.ba2023.PauseActivity
+import com.example.ba2023.WritingActivity
+import com.example.ba2023.model.CycleUtil.getCycle
+import com.example.ba2023.model.CycleUtil.setCycle
+import java.lang.ref.WeakReference
+import java.util.concurrent.TimeUnit
 
-import com.example.ba2023.FinishedActivity;
-import com.example.ba2023.PauseActivity;
-import com.example.ba2023.WritingActivity;
+class CountDownModel private constructor(
+    millisInFuture: Long,
+    countDownInterval: Long,
+    context: Context
+) : CountDownTimer(millisInFuture, countDownInterval) {
+    private val contextRef: WeakReference<Context>
 
-import java.lang.ref.WeakReference;
-import java.util.concurrent.TimeUnit;
-
-public class CountDownModel  extends CountDownTimer {
-
-    private static String hms;
-    private static CountDownModel instance;
-    private static TextView currentTextView;
-    private static String caller;
-    private WeakReference<Context> contextRef;
-
-    private CountDownModel(long millisInFuture, long countDownInterval, Context context) {
-        super(millisInFuture, countDownInterval);
-        hms = formatTime(millisInFuture);
-        contextRef = new WeakReference<>(context);
+    init {
+        formatedTime = formatTime(millisInFuture)
+        contextRef = WeakReference(context)
     }
 
-    public static CountDownModel initInstance(long millisInFuture, long countDownInterval, Context activity) {
-        instance = new CountDownModel(millisInFuture, countDownInterval, activity);
-        return instance;
+    private fun formatTime(millis: Long): String {
+        return String.format(
+            "%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+            TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(
+                TimeUnit.MILLISECONDS.toHours(
+                    millis
+                )
+            ),
+            TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(
+                TimeUnit.MILLISECONDS.toMinutes(
+                    millis
+                )
+            )
+        )
     }
 
-    public static CountDownModel getInstance() throws Exception {
-        if (instance == null) {
-            throw new Exception("Parameters not initialized. Initiate with initInstance");
-        } else {
-            return instance;
-        }
-    }
-
-    public static boolean isInstanceNull() {
-        return instance == null;
-    }
-    public static String getFormatedTime() {
-        return hms;
-    }
-    public static String getTimeMS() {
-        return hms.substring(3);
-    }
-
-    public static TextView getCurrentTextView() {
-        return currentTextView;
-    }
-
-    public static void setCaller(String caller) {
-        CountDownModel.caller = caller;
-    }
-
-    public static String getCaller() {
-        return caller;
-    }
-
-    public static void setCurrentTextView(TextView currentTextView) {
-        CountDownModel.currentTextView = currentTextView;
-    }
-
-    private String formatTime(long millis) {
-        String format = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
-                TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-        return format;
-    }
-    @Override
-    public void onTick(long l) {
-
-        long millis = l;
-        hms = formatTime(millis);
+    override fun onTick(l: Long) {
+        formatedTime = formatTime(l)
         if (currentTextView != null) {
-            currentTextView.setText(getTimeMS());
+            currentTextView!!.text = timeMS
         }
     }
 
-    @Override
-    public void onFinish() {
-        int cycle = CycleUtil.getCycle();
-
-        Class switchActivity = PauseActivity.class;
+    override fun onFinish() {
+        var cycle = getCycle()
+        var switchActivity: Class<*> = PauseActivity::class.java
         //stop the exercise
         if (cycle == 0) {
-            switchActivity = FinishedActivity.class;
+            switchActivity = FinishedActivity::class.java
         }
-        Context context = contextRef.get();
-        if (caller.equals(PauseActivity.class.getName())) {
-            switchActivity = WritingActivity.class;
-            CycleUtil.setCycle(--cycle);
+        val context = contextRef.get()
+        if (caller == PauseActivity::class.java.name) {
+            WritingStatusManager.setScreenState(WritingStatusManager.ScreenState.WRITING)
+            switchActivity = WritingActivity::class.java
+            setCycle(--cycle)
+        }
+        if (context != null) {
+            val intent = Intent(context, switchActivity)
+            context.startActivity(intent)
+        }
+    }
+
+    companion object {
+        lateinit var formatedTime: String
+        private var instance: CountDownModel? = null
+        var currentTextView: TextView? = null
+        var caller: String? = null
+        fun initInstance(
+            millisInFuture: Long,
+            countDownInterval: Long,
+            activity: Context
+        ): CountDownModel? {
+            instance = CountDownModel(millisInFuture, countDownInterval, activity)
+            return instance
         }
 
-        if (context != null) {
-            Intent intent = new Intent(context, switchActivity);
-            context.startActivity(intent);
+        @Throws(Exception::class)
+        fun getInstance(): CountDownModel? {
+            return if (instance == null) {
+                throw Exception("Parameters not initialized. Initiate with initInstance")
+            } else {
+                instance
+            }
         }
+
+        val isInstanceNull: Boolean
+            get() = instance == null
+        val timeMS: String
+            get() = formatedTime.substring(3)
     }
 }

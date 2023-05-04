@@ -1,23 +1,19 @@
 import android.content.Context
-import android.os.Build
-import android.os.VibrationEffect
-import android.os.Vibrator
-import androidx.core.content.ContextCompat
 import com.example.ba2023.model.ScreenHandler
 import com.example.ba2023.model.WritingController
 
 object WritingStatusManager {
     private var lastScreenChangeTimeStmp = System.currentTimeMillis()
-    private val secondsTillThinkingState = 5 * 1000L
-    private val secondsTillDisturbedState = 5 * 1000L
-    private val secondsTillWritingState = 60 * 1000L
+    private const val secondsTillThinkingState = 5 * 1000L
+    private const val secondsTillWritingState = 5 * 1000L
+    private const val secondsTillDisturbedState = 60 * 1000L
+
     private var initialState = true
     private var disturbedCounter = 0
     private var secondsInWriting = 0
     private var secondsInThinking = 0
     private var secondsInDisturbed = 0
 
-    private lateinit var vibrator: Vibrator
     private lateinit var writingController: WritingController
     private lateinit var screenHandler: ScreenHandler
 
@@ -31,7 +27,6 @@ object WritingStatusManager {
     fun initStatusManager(context: Context) {
         writingController = WritingController(context)
         screenHandler = ScreenHandler(context)
-        vibrator = ContextCompat.getSystemService(context, Vibrator::class.java) as Vibrator
     }
     fun checkWritingStatus(x: Double, y: Double, z: Double) {
         val currentTime = System.currentTimeMillis()
@@ -68,10 +63,13 @@ object WritingStatusManager {
                     disturbedCounter++
                     lastScreenChangeTimeStmp = currentTime
                     screenHandler.showDistractedActivity()
-                    vibrateWatch()
                 }
             }
         }
+    }
+
+    fun setScreenState(state: ScreenState) {
+        screenState = state
     }
 
     private fun updateTimesSpentInStates(currentTime: Long) {
@@ -81,10 +79,5 @@ object WritingStatusManager {
             ScreenState.THINKING -> secondsInThinking += timeSpent
             ScreenState.DISTURBED -> secondsInDisturbed += timeSpent
         }
-    }
-
-    private fun vibrateWatch() {
-        val vibrationEffect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE)
-        vibrator.vibrate(vibrationEffect)
     }
 }

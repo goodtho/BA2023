@@ -18,19 +18,20 @@ class SettingsActivity : Activity() {
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_settings)
 
-        val isInstanceNull:Boolean= CountDownModel.isInstanceNull()
+        val isInstanceNull:Boolean= CountDownModel.isInstanceNull
         if(!isInstanceNull) {
-             countDownModel = CountDownModel.getInstance()
+             countDownModel = CountDownModel.getInstance()!!
         }
         val finishLearningButton:LinearLayout = findViewById(R.id.finishLearningLinearLayout)
         val resetTimerButton:LinearLayout = findViewById(R.id.resetTimerLinearLayout)
         val timerConfigButton:LinearLayout = findViewById(R.id.timerConfigLinearLayout)
 
         finishLearningButton.setOnClickListener{
-            if (!isInstanceNull)
+            if (!isInstanceNull) {
                 countDownModel.cancel()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+            }
         }
 
         resetTimerButton.setOnClickListener{

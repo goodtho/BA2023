@@ -36,21 +36,21 @@ class WritingActivity : ScreenActivity(), SensorEventListener {
 
         setUpSettingsClickListener(settingIcon,this.javaClass.name)
 
-        if (CountDownModel.isInstanceNull()
-            || CountDownModel.getCaller() == PauseActivity::class.java.name
-            || CountDownModel.getCaller() == MainActivity::class.java.name) {
+        if (CountDownModel.isInstanceNull
+            || CountDownModel.caller == PauseActivity::class.java.name
+            || CountDownModel.caller == MainActivity::class.java.name) {
             var configModel = ConfigModel(this)
             var writingTime = configModel.getProperty(ConfigModel.TIMER_WRITING).toLong()
-            countDownModel = CountDownModel.initInstance(writingTime, 1000, this)
+            countDownModel = CountDownModel.initInstance(writingTime, 1000, this)!!
             countDownModel.start()
 
         }  else {
-            countDownModel = CountDownModel.getInstance()
+            countDownModel = CountDownModel.getInstance()!!
         }
 
-        CountDownModel.setCaller(this.javaClass.name)
-        CountDownModel.setCurrentTextView(timer)
-        timer.text = CountDownModel.getTimeMS()
+        CountDownModel.caller = this.javaClass.name
+        CountDownModel.currentTextView = timer
+        timer.text = CountDownModel.timeMS
 
         val thumbsUpIcon: ImageView = findViewById(R.id.startButton)
         thumbsUpIcon.setOnClickListener{

@@ -35,15 +35,11 @@ class DistractedActivity : ScreenActivity(), SensorEventListener {
         val timer: TextView = findViewById(R.id.timer)
 
         setUpSettingsClickListener(settingIcon,this.javaClass.name)
-        countDownModel = CountDownModel.getInstance()
-        CountDownModel.setCurrentTextView(timer)
-        timer.text = CountDownModel.getTimeMS()
+        countDownModel = CountDownModel.getInstance()!!
+        CountDownModel.currentTextView = timer
+        timer.text = CountDownModel.timeMS
 
-        val thumbsUpIcon: ImageView = findViewById(R.id.startButton)
-        thumbsUpIcon.setOnClickListener{
-            val intent = Intent(this, WritingActivity::class.java)
-            startActivity(intent)
-        }
+        vibrate(500)
     }
 
     override fun onResume() {

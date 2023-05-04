@@ -21,6 +21,8 @@ class MainActivity : ScreenActivity() {
         val settingsButton = binding.settingsIcon
 
         startButton.setOnClickListener{
+            WritingStatusManager.initStatusManager(this)
+            WritingStatusManager.setScreenState(WritingStatusManager.ScreenState.WRITING)
             val intent = Intent(this, WritingActivity::class.java)
             startActivity(intent)
         }
@@ -29,7 +31,6 @@ class MainActivity : ScreenActivity() {
 
         //load Cycle for the exercises
         CycleUtil.loadCycleFromConfig(this)
-        CountDownModel.setCaller(this.javaClass.name)
-        WritingStatusManager.initStatusManager(this)
+        CountDownModel.caller = this.javaClass.name
     }
 }
