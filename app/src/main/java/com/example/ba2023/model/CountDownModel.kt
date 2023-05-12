@@ -4,7 +4,10 @@ import WritingStatusManager
 import android.content.Context
 import android.content.Intent
 import android.os.CountDownTimer
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.example.ba2023.FinishedActivity
 import com.example.ba2023.PauseActivity
 import com.example.ba2023.WritingActivity
@@ -60,6 +63,8 @@ class CountDownModel private constructor(
             WritingStatusManager.setScreenState(WritingStatusManager.ScreenState.WRITING)
             switchActivity = WritingActivity::class.java
             setCycle(--cycle)
+            vibrate(context,500)
+
         }
         if (context != null) {
             val intent = Intent(context, switchActivity)
@@ -95,4 +100,13 @@ class CountDownModel private constructor(
         val timeMS: String
             get() = formatedTime.substring(3)
     }
+    private fun vibrate(context: Context?,durationMillis: Long) {
+        if (context != null) {
+            val vibrator = ContextCompat.getSystemService(context, Vibrator::class.java) as Vibrator
+            val vibrationEffect = VibrationEffect.createOneShot(durationMillis, VibrationEffect.DEFAULT_AMPLITUDE)
+            vibrator.vibrate(vibrationEffect)
+        }
+
+    }
+
 }

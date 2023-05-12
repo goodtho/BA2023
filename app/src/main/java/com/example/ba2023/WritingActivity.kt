@@ -12,6 +12,8 @@ import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.wear.widget.BoxInsetLayout
 import com.example.ba2023.databinding.ActivityMainBinding
 import com.example.ba2023.model.ConfigModel
 import com.example.ba2023.model.CountDownModel
@@ -43,7 +45,6 @@ class WritingActivity : ScreenActivity(), SensorEventListener {
             var writingTime = configModel.getProperty(ConfigModel.TIMER_WRITING).toLong()
             countDownModel = CountDownModel.initInstance(writingTime, 1000, this)!!
             countDownModel.start()
-
         }  else {
             countDownModel = CountDownModel.getInstance()!!
         }

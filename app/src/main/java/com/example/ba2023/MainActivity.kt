@@ -23,14 +23,16 @@ class MainActivity : ScreenActivity() {
         startButton.setOnClickListener{
             WritingStatusManager.initStatusManager(this)
             WritingStatusManager.setScreenState(WritingStatusManager.ScreenState.WRITING)
+            WritingStatusManager.DISTURBED_COUNTER = 0
+
+            //load Cycle for the exercises
+            CycleUtil.loadCycleFromConfig(this)
+            CountDownModel.caller = this.javaClass.name
+
             val intent = Intent(this, WritingActivity::class.java)
             startActivity(intent)
         }
 
         setUpSettingsClickListener(settingsButton,this.javaClass.name)
-
-        //load Cycle for the exercises
-        CycleUtil.loadCycleFromConfig(this)
-        CountDownModel.caller = this.javaClass.name
     }
 }

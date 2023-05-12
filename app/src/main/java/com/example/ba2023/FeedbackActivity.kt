@@ -3,6 +3,7 @@ package com.example.ba2023
 import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
+import android.widget.TextView
 import com.example.ba2023.databinding.ActivityFeedbackBinding
 import java.lang.Math.abs
 
@@ -23,6 +24,17 @@ class FeedbackActivity : ScreenActivity() {
         binding = ActivityFeedbackBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        var textMessage:TextView = findViewById(R.id.textMessage)
+        if (WritingStatusManager.DISTURBED_COUNTER != 0) {
+            textMessage.textSize = 14f
+            textMessage.text = buildString {
+                append("Du warst nur ")
+                append(WritingStatusManager.DISTURBED_COUNTER)
+                append(" mal abgelenkt.")
+            }
+        } else {
+            textMessage.textSize = 16f // default size
+        }
     }
 
     override fun onBackPressed() {

@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.ba2023.databinding.ActivityPauseBinding
 import com.example.ba2023.model.ConfigModel
 import com.example.ba2023.model.CountDownModel
@@ -24,7 +25,7 @@ class PauseActivity : ScreenActivity() {
 
         val settingIcon: ImageView = findViewById(R.id.settingsIcon)
         val timer: TextView = findViewById(R.id.timer)
-
+        val pauseLayout: ConstraintLayout = findViewById(R.id.pauseLayout)
         setUpSettingsClickListener(settingIcon,this.javaClass.name)
 
 
@@ -34,7 +35,10 @@ class PauseActivity : ScreenActivity() {
         CountDownModel.caller = this.javaClass.name
 
         CountDownModel.currentTextView = timer
-        countDownModel.start()
+        pauseLayout.setOnClickListener{
+            countDownModel.start()
+            pauseLayout.setOnClickListener(null)
+        }
         timer.text = CountDownModel.timeMS
 
         vibrate(500)

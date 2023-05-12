@@ -9,7 +9,7 @@ object WritingStatusManager {
     private const val secondsTillDisturbedState = 60 * 1000L
 
     private var initialState = true
-    private var disturbedCounter = 0
+    var DISTURBED_COUNTER = 0
     private var secondsInWriting = 0
     private var secondsInThinking = 0
     private var secondsInDisturbed = 0
@@ -60,7 +60,7 @@ object WritingStatusManager {
                 if (screenState == ScreenState.THINKING && currentTime - lastScreenChangeTimeStmp >= secondsTillDisturbedState) {
                     updateTimesSpentInStates(currentTime)
                     screenState = ScreenState.DISTURBED
-                    disturbedCounter++
+                    DISTURBED_COUNTER++
                     lastScreenChangeTimeStmp = currentTime
                     screenHandler.showDistractedActivity()
                 }

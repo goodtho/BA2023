@@ -37,12 +37,6 @@ class ThinkingActivity : ScreenActivity(), SensorEventListener {
         countDownModel = CountDownModel.getInstance()!!
         CountDownModel.currentTextView = timer
         timer.text = CountDownModel.timeMS
-
-        val thumbsUpIcon: ImageView = findViewById(R.id.startButton)
-        thumbsUpIcon.setOnClickListener{
-            val intent = Intent(this, DistractedActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     override fun onResume() {
