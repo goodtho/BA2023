@@ -3,7 +3,6 @@ package com.example.ba2023
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.LinearLayout
 import com.example.ba2023.databinding.ActivitySettingsBinding
 import com.example.ba2023.model.CountDownModel
@@ -25,6 +24,8 @@ class SettingsActivity : Activity() {
         val finishLearningButton:LinearLayout = findViewById(R.id.finishLearningLinearLayout)
         val resetTimerButton:LinearLayout = findViewById(R.id.resetTimerLinearLayout)
         val timerConfigButton:LinearLayout = findViewById(R.id.timerConfigLinearLayout)
+        val statisticsButton:LinearLayout = findViewById(R.id.statisticLinearLayout)
+
 
         finishLearningButton.setOnClickListener{
             if (!isInstanceNull) {
@@ -46,5 +47,9 @@ class SettingsActivity : Activity() {
             startActivity(intent)
         }
 
+        statisticsButton.setOnClickListener {
+            val intent = Intent(this, StatisticsActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

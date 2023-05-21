@@ -54,6 +54,8 @@ class CountDownModel private constructor(
     override fun onFinish() {
         var cycle = getCycle()
         var switchActivity: Class<*> = PauseActivity::class.java
+        //write last screen state to file
+        WritingStatusManager.updateTimesSpentInStates(System.currentTimeMillis())
         //stop the exercise
         if (cycle == 0) {
             switchActivity = FinishedActivity::class.java
@@ -71,6 +73,7 @@ class CountDownModel private constructor(
             context.startActivity(intent)
         }
     }
+
 
     companion object {
         lateinit var formatedTime: String

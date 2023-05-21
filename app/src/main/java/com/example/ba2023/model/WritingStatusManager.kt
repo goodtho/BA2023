@@ -1,6 +1,7 @@
 import android.content.Context
 import com.example.ba2023.model.ScreenHandler
 import com.example.ba2023.model.WritingController
+import com.example.ba2023.model.WritingStatusFileWriter
 
 object WritingStatusManager {
     private var lastScreenChangeTimeStmp = System.currentTimeMillis()
@@ -16,6 +17,7 @@ object WritingStatusManager {
 
     private lateinit var writingController: WritingController
     private lateinit var screenHandler: ScreenHandler
+    private lateinit var fileWriter: WritingStatusFileWriter
 
     enum class ScreenState {
         WRITING,
@@ -23,10 +25,11 @@ object WritingStatusManager {
         DISTURBED
     }
     private var screenState = ScreenState.WRITING
-
+    private var previousState = ScreenState.WRITING
     fun initStatusManager(context: Context) {
         writingController = WritingController(context)
         screenHandler = ScreenHandler(context)
+        fileWriter = WritingStatusFileWriter(context)
     }
     fun checkWritingStatus(x: Double, y: Double, z: Double) {
         val currentTime = System.currentTimeMillis()
@@ -72,12 +75,11 @@ object WritingStatusManager {
         screenState = state
     }
 
-    private fun updateTimesSpentInStates(currentTime: Long) {
+     fun updateTimesSpentInStates(currentTime: Long) {
         val timeSpent = ((currentTime - lastScreenChangeTimeStmp) / 1000).toInt()
-        when (screenState) {
-            ScreenState.WRITING -> secondsInWriting += timeSpent
-            ScreenState.THINKING -> secondsInThinking += timeSpent
-            ScreenState.DISTURBED -> secondsInDisturbed += timeSpent
-        }
+        println("WritingStatusManager: $previousState -> $screenState")
+        println("$screenState time spent: $timeSpent")
+        fileWriter.writeStatus(screenState,timeSpent)
+
     }
 }

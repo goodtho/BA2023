@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.example.ba2023.databinding.ActivityMainBinding
 import com.example.ba2023.model.CountDownModel
 import com.example.ba2023.model.CycleUtil
+import com.example.ba2023.model.WritingStatusFileWriter
 
 class MainActivity : ScreenActivity() {
 
@@ -24,6 +25,10 @@ class MainActivity : ScreenActivity() {
             WritingStatusManager.initStatusManager(this)
             WritingStatusManager.setScreenState(WritingStatusManager.ScreenState.WRITING)
             WritingStatusManager.DISTURBED_COUNTER = 0
+
+            //write timestamp to file
+            var fileWriter:WritingStatusFileWriter = WritingStatusFileWriter(this)
+            fileWriter.writeTimestamp(System.currentTimeMillis())
 
             //load Cycle for the exercises
             CycleUtil.loadCycleFromConfig(this)
