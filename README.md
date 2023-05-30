@@ -1,20 +1,23 @@
 # BA2023
 
-Short description or tagline for your project
+Bachelorarbeit "Feedback Schreibaktivität mit einer Smartwatch".
+- Thomas Good
+- Valentin Kleisner 
+## Inhaltsverzeichnis
 
-## Table of Contents
-
-- [Introduction](#introduction)
+- [Einleitung](#einleitung)
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Introduction
+## Einleitung
+Ziel der Bachelorarbeit ist eine Smartwatch Applikation, welche Kinder mit ADHS bei Schreibarbeiten unterstützt. 
+Die Applikation erkennt anhand des Beschleunigungssensors die aktuelle Position der Smartwatch und nutzt dies, um verschieden Zustände (Schreiben/ nicht Schreiben) darzustellen. Falls der Nutzer eine Minute abgelenkt ist, vibriert die Smartwatch und eine Schreiberinnerung erscheint.
 
-Briefly introduce your project and provide an overview of its purpose and goals.
-
+Eine Samsung Galaxy Watch4 mit 40mm Durchmesser
+https://www.digitec.ch/de/s1/product/samsung-galaxy-watch4-40-mm-aluminium-sportuhr-smartwatch-16382587
 ## Features
 
 List the key features or functionalities of your project.
