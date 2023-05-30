@@ -34,7 +34,8 @@ Anleitung für Emulator:
 2. Android Studio lädt nun den Emulator herunter. Dieser kann im "Device Manager" mit dem "Play" Icon gestartet werden. 
 3. Mit dem grünen "Play"-Icon (Leiste oben mitte) kann nun die Applikation deployed werden.
 
-Anleitung physisches Device zu verbinden.
+Anleitung physisches Device zu verbinden:
+
 Der Computer mit Android Studio und die Smartwatch müssen sich im gleichen Netzwerk befinden.
 1. Die Smartwatch muss sich im "Developer" Modus befinden. Dies ist für die zwei Smartwatches, welche vom Institut bereitgestellt wurden bereits konfiguriert. Falls eine neue Smartwatch benutzt wird, kann Developer Modus gemäss diesem [Tutorial](https://developer.android.com/training/wearables/get-started/debugging) eingestellt werden. 
 2. Smartwatch Einstellungen öffnen (Swipe von oben nach unten, klick auf das Zahnrad). 
