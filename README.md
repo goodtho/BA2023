@@ -8,9 +8,6 @@ Bachelorarbeit "Feedback Schreibaktivität mit einer Smartwatch".
 - [Einleitung](#einleitung)
 - [Features](#features)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Einleitung
 Ziel der Bachelorarbeit ist eine Smartwatch App, welche Kinder mit ADHS bei Schreibarbeiten unterstützt. 
@@ -47,26 +44,17 @@ Der Computer mit Android Studio und die Smartwatch müssen sich im gleichen Netz
 6. In Android Studio "Device Manager" > "Physical" auswählen und Smartwatch über "Pair using Wifi" verbinden.*
 7. Nun kann die die Applikation über den grünen "Play"-Knopf gestartet werden. Das App wird direkt geöffnet, falls die App ausversehen geschlossen wird, befindet sich das App bei den Smartwatch Apps(Swipe unten nach oben -> Symbol mit Android Logo).
 
-* Die "Pair using Wifi" Option funktionierte bei der Entwicklung sehr schlecht. Falls dies nicht funktioniert, kann die Smartwatch über das Terminal verbunden werden.
+\* Die "Pair using Wifi" Option funktionierte bei der Entwicklung sehr schlecht. Falls dies nicht funktioniert, kann die Smartwatch über das Terminal verbunden werden.
+Android Studio Terminal öffnen und folgende Befehle ausführen:
+```
+adb pair <ip-addr>:<port> <pairing_code>
+```
+Die Parameter sind in Punkt 5. der physischen Device Anleitung zu finden.
+```
+adb connect <ip-addr>:<port>
+```
+Die IP-Adresse under der Port werden unter "Developer Options"-> "WLAN" Debugging zu finden. Der Port von connect und Pair unterscheiden sich.
+Falls der ADB-Command nicht gefunden wird muss adb der Path-Umgebungsvariable hinzugefügt werden.
+[Ab Step 3 dieses Tutorials.](https://linuxhint.com/fix-adb-not-recognize-internal-external-command-windows-10/)
 
-
-## Usage
-
-Explain how to use your project, including any command-line examples or code snippets. Provide clear instructions and explanations.
-
-## Contributing
-
-Explain how others can contribute to your project. Provide guidelines for submitting bug reports, feature requests, or pull requests. Mention any coding conventions or standards that contributors should follow.
-
-## License
-
-Specify the license under which your project is released. For example, "MIT License" or "Apache License 2.0". Include any license badges or acknowledgments.
-
-## Acknowledgments
-
-If there are any individuals or resources you want to acknowledge, mention them here.
-
-## Contact
-
-Provide your contact information or ways for users to reach out to you with questions or feedback.
 
