@@ -13,18 +13,42 @@ Bachelorarbeit "Feedback Schreibaktivität mit einer Smartwatch".
 - [License](#license)
 
 ## Einleitung
-Ziel der Bachelorarbeit ist eine Smartwatch Applikation, welche Kinder mit ADHS bei Schreibarbeiten unterstützt. 
+Ziel der Bachelorarbeit ist eine Smartwatch App, welche Kinder mit ADHS bei Schreibarbeiten unterstützt. 
 Die Applikation erkennt anhand des Beschleunigungssensors die aktuelle Position der Smartwatch und nutzt dies, um verschieden Zustände (Schreiben/ nicht Schreiben) darzustellen. Falls der Nutzer eine Minute abgelenkt ist, vibriert die Smartwatch und eine Schreiberinnerung erscheint.
 
-Eine Samsung Galaxy Watch4 mit 40mm Durchmesser
-https://www.digitec.ch/de/s1/product/samsung-galaxy-watch4-40-mm-aluminium-sportuhr-smartwatch-16382587
-## Features
+Spezifikationen Smartwatch:
+Samsung Galaxy Watch4 mit 40mm Durchmesser
 
-List the key features or functionalities of your project.
+Die Samsung Galaxy Watch basiert auf dem Android Betriebsystem WatchOS, weshalb die Programmierung in Android Studio erfolgte, mit Kotlin/Java als Programmiersprache.
+
+## Features
+1. Startbildschirm, der als Eintrittspunkt in die Applikation agiert. 
+2. Zustandsbildschirme für Schreiben / Nachdenken und Abgelenkt gesteuert nach Auswertung des Beschleunigungssensor.
+3. Konfigurationsbildschirm, um Schreibzeit anzupassen, die Schreibarbeit zu beenden / neustarten und die Statistik über vergangene Schreibarbeiten anzuschauen.
+4. "Übung beendet"-bildschirm, der Sterne als Belohnungssystem nutzt und anzeigt, wie oft der Nutzer abgelenkt war.  
 
 ## Installation
+1. [Android Studio](https://developer.android.com/studio) herunterladen und installieren.
+2. BA2023 von Github in Android Studio importieren. "File" > "New" > "Project from Version Control"
+3. Projekt in Emulator starten oder als physisches Device verbinden.
 
-Provide step-by-step instructions on how to install and set up your project. Include any dependencies or prerequisites that need to be installed.
+Anleitung für Emulator:
+1. Neues Device hinzufügen: "DeviceManager" > "Virtual Device" > "Create Device". Für die Entwicklung wurde "WearOS Small Round API 30" verwendet.
+2. Android Studio lädt nun den Emulator herunter. Dieser kann im "Device Manager" mit dem "Play" Icon gestartet werden. 
+3. Mit dem grünen "Play"-Icon (Leiste oben mitte) kann nun die Applikation deployed werden.
+
+Anleitung physisches Device zu verbinden.
+Der Computer mit Android Studio und die Smartwatch müssen sich im gleichen Netzwerk befinden.
+1. Die Smartwatch muss sich im "Developer" Modus befinden. Dies ist für die zwei Smartwatches, welche vom Institut bereitgestellt wurden bereits konfiguriert. Falls eine neue Smartwatch benutzt wird, kann Developer Modus gemäss diesem [Tutorial](https://developer.android.com/training/wearables/get-started/debugging) eingestellt werden. 
+2. Smartwatch Einstellungen öffnen (Swipe von oben nach unten, klick auf das Zahnrad). 
+3. Mit WLAN verbinden.
+4. "Developer Options"(ganz unten in den Einstellungen) öffnen und "ADB-Debugging" und "WLAN Debugging" einstellen. (Falls nicht schon eingestellt).
+5. "WLAN Debugging..." öffnen und auf "new Device" klicken. Nun erscheint ein Pairing Code.
+6. In Android Studio "Device Manager" > "Physical" auswählen und Smartwatch über "Pair using Wifi" verbinden.*
+7. Nun kann die die Applikation über den grünen "Play"-Knopf gestartet werden. Das App wird direkt geöffnet, falls die App ausversehen geschlossen wird, befindet sich das App bei den Smartwatch Apps(Swipe unten nach oben -> Symbol mit Android Logo).
+
+* Die "Pair using Wifi" Option funktionierte bei der Entwicklung sehr schlecht. Falls dies nicht funktioniert, kann die Smartwatch über das Terminal verbunden werden.
+
 
 ## Usage
 
