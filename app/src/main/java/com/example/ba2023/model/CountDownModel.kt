@@ -16,6 +16,8 @@ import com.example.ba2023.model.CycleUtil.setCycle
 import java.lang.ref.WeakReference
 import java.util.concurrent.TimeUnit
 
+private const val STATE_CHANGE_DELAY = 1000
+
 class CountDownModel private constructor(
     millisInFuture: Long,
     countDownInterval: Long,
@@ -54,8 +56,7 @@ class CountDownModel private constructor(
     override fun onFinish() {
         var cycle = getCycle()
         var switchActivity: Class<*> = PauseActivity::class.java
-        //write last screen state to file
-        WritingStatusManager.updateTimesSpentInStates(System.currentTimeMillis())
+
         //stop the exercise
         if (cycle == 0) {
             switchActivity = FinishedActivity::class.java
@@ -68,6 +69,13 @@ class CountDownModel private constructor(
             vibrate(context,500)
 
         }
+
+        //write last screen state to file
+        if (caller != PauseActivity::class.java.name) {
+            WritingStatusManager.updateTimesSpentInStates(System.currentTimeMillis() + STATE_CHANGE_DELAY)
+        }
+        WritingStatusManager.resetTimestamp()
+
         if (context != null) {
             val intent = Intent(context, switchActivity)
             context.startActivity(intent)

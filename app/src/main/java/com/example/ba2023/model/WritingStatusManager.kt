@@ -11,9 +11,6 @@ object WritingStatusManager {
 
     private var initialState = true
     var DISTURBED_COUNTER = 0
-    private var secondsInWriting = 0
-    private var secondsInThinking = 0
-    private var secondsInDisturbed = 0
 
     private lateinit var writingController: WritingController
     private lateinit var screenHandler: ScreenHandler
@@ -30,6 +27,7 @@ object WritingStatusManager {
         writingController = WritingController(context)
         screenHandler = ScreenHandler(context)
         fileWriter = WritingStatusFileWriter(context)
+        resetTimestamp()
     }
     fun checkWritingStatus(x: Double, y: Double, z: Double) {
         val currentTime = System.currentTimeMillis()
@@ -49,8 +47,8 @@ object WritingStatusManager {
                 updateTimesSpentInStates(currentTime)
                 screenState = ScreenState.WRITING
                 screenHandler.showWritingActivity()
+                lastScreenChangeTimeStmp = currentTime
             }
-            lastScreenChangeTimeStmp = currentTime
         } else {
             if (screenState == ScreenState.WRITING) {
                 if (currentTime - lastScreenChangeTimeStmp >= secondsTillThinkingState) {
@@ -71,6 +69,10 @@ object WritingStatusManager {
         }
     }
 
+    fun resetTimestamp() {
+        lastScreenChangeTimeStmp = System.currentTimeMillis()
+    }
+
     fun setScreenState(state: ScreenState) {
         screenState = state
     }
@@ -80,6 +82,5 @@ object WritingStatusManager {
         println("WritingStatusManager: $previousState -> $screenState")
         println("$screenState time spent: $timeSpent")
         fileWriter.writeStatus(screenState,timeSpent)
-
     }
 }
