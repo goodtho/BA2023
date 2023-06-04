@@ -41,7 +41,11 @@ class PauseActivity : ScreenActivity() {
         }
         timer.text = CountDownModel.timeMS
 
-        vibrate(500)
+        vibratePauseBeginning()
+    }
 
+    override fun onPause() {
+        super.onPause()
+        vibrateFinish()
     }
 }

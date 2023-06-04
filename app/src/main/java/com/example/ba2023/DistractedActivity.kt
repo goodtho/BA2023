@@ -1,7 +1,6 @@
 package com.example.ba2023
 
 import android.content.Context
-import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -11,8 +10,6 @@ import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.ba2023.databinding.ActivityDistractedBinding
-import com.example.ba2023.databinding.ActivityMainBinding
-import com.example.ba2023.databinding.ActivityThinkingBinding
 import com.example.ba2023.model.CountDownModel
 
 class DistractedActivity : ScreenActivity(), SensorEventListener {
@@ -39,7 +36,7 @@ class DistractedActivity : ScreenActivity(), SensorEventListener {
         CountDownModel.currentTextView = timer
         timer.text = CountDownModel.timeMS
 
-        vibrate(500)
+        vibrateDistracted()
     }
 
     override fun onResume() {

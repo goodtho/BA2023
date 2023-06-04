@@ -16,6 +16,8 @@ class FinishedActivity : ScreenActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        vibrateFinish()
+
         binding = ActivityFinishedBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -25,6 +27,5 @@ class FinishedActivity : ScreenActivity() {
             startActivity(intent)
             finish()
         }, delayTime)
-
     }
 }
