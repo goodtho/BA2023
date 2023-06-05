@@ -10,23 +10,22 @@ class WritingController(private val writingStatusManager: Context) {
     private val buffer = CircularBuffer(10)
 
     object WritingValues {
-        // add 40% threshold
+        // add 50% threshold
         private const val increase = 1.5
         private const val decrease = 0.5
         object X {
-            const val Min = -2.5 * increase
-            const val Max = 1.1 * increase
+            const val Min = -0.9 * increase
+            const val Max = 1.04 * increase
         }
         object Y {
-            const val Min = -11.0 * increase
-            const val Max = -6.5 * decrease
+            const val Min = -10.31 * increase
+            const val Max = -7.62 * decrease
         }
         object Z {
-            const val Min = 3.5 * decrease
-            const val Max = 7.9 * increase
+            const val Min = 2.21 * decrease
+            const val Max = 6.62 * increase
         }
     }
-
 
     fun isAndroidWatchWritingAverage(): Boolean {
         val pastX = buffer.getXValues().average()
