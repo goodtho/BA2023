@@ -58,4 +58,8 @@ Die IP-Adresse under der Port werden unter "Developer Options"-> "WLAN" Debuggin
 Falls der ADB-Command nicht gefunden wird muss adb der Path-Umgebungsvariable hinzugefügt werden.
 [Ab Step 3 dieses Tutorials.](https://linuxhint.com/fix-adb-not-recognize-internal-external-command-windows-10/)
 
+Die Auswertungen der Schreibübungen sind im Filesystem der Watch abgespeichert.
+"View" > "Tool Windows" > "Device File Explorer" => /data/data/com.example.ba2020/files/writing_status.txt
+
+
 
